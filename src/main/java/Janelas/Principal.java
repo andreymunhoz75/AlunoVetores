@@ -4,17 +4,29 @@
  */
 package Janelas;
 
+import Objetos.Aluno;
+import java.awt.Component;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+
 /**
  *
  * @author andrey.munhoz
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    private int contador = 0;
+    private Aluno[] alunos = new Aluno[5];
+    private JP JP;
+    
+    
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        jLTopo.setText("Cadastro Aluno#" + (contador + 1));
     }
 
     /**
@@ -27,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPResult = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
+        jLTopo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTAluno = new javax.swing.JTextField();
@@ -38,9 +50,9 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro Aluno 1#");
+        jLTopo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLTopo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTopo.setText("Cadastro Aluno 1#");
 
         jLabel2.setText("Aluno");
 
@@ -49,8 +61,18 @@ public class Principal extends javax.swing.JFrame {
         jBMostrar.setText("Mostrar");
 
         jBAdicionar.setText("Adicionar");
+        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdicionarActionPerformed(evt);
+            }
+        });
 
         jBNova.setText("Cadastrar Novamente");
+        jBNova.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNovaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLTopo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBNova))
@@ -88,7 +110,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLTopo)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -110,9 +132,60 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jBNovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNovaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBNovaActionPerformed
+
+    private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
+        Aluno a = new Aluno();
+        
+        if (contador < alunos.length){
+            a.setNome(jTAluno.getText());
+            a.setIdade(Integer.parseInt(jTIdade.getText()));
+            alunos[contador] = a;
+            jTAluno.setText("");
+            jTIdade.setText("");
+            jTAluno.requestFocus();
+            contador++;
+            jLTopo.setText("Cadastro Aluno #" + (contador + 1));
+            
+            if (contador == 5){
+                jTAluno.setEnabled(false);
+                jTIdade.setEnabled(false);
+                jBAdicionar.setEnabled(false);
+                mostrarCadastro();
+            }
+        } else {
+            jBAdicionar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jBAdicionarActionPerformed
+
+        private void mostrarCadastro(){
+            jPResult.setLayout(new BoxLayout (jPResult, BoxLayout.Y_AXIS));
+            
+            for (Aluno aluno : alunos){
+                JP = new JP();
+                for (Component comp : JP.getComponents()) {
+                    
+                    if (comp instanceof JLabel && "jLNome".equals(comp.getName())){
+                       JLabel labelNome = (JLabel) comp;
+                       labelNome.setText(aluno.getNome());
+                    }
+                    
+                    if (comp instanceof JLabel && "jLIdade".equals(comp.getName())){
+                        JLabel labelIdade = (JLabel) comp;
+                        labelIdade.setText(String.valueOf(aluno.getIdade()));
+                    }
+                }
+                jPResult.add(JP);
+            }
+            jPResult.revalidate();
+            jPResult.repaint();
+        }
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -149,7 +222,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jBAdicionar;
     private javax.swing.JButton jBMostrar;
     private javax.swing.JButton jBNova;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLTopo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jPResult;
