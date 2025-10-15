@@ -7,6 +7,7 @@ package Janelas;
 import Objetos.Aluno;
 import java.awt.Component;
 import javax.swing.BoxLayout;
+
 import javax.swing.JLabel;
 
 /**
@@ -38,17 +39,31 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPResult = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPResult = new javax.swing.JPanel();
         jLTopo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTAluno = new javax.swing.JTextField();
-        jTIdade = new javax.swing.JTextField();
+        jPIdade = new javax.swing.JTextField();
         jBMostrar = new javax.swing.JButton();
         jBAdicionar = new javax.swing.JButton();
         jBNova = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jPResultLayout = new javax.swing.GroupLayout(jPResult);
+        jPResult.setLayout(jPResultLayout);
+        jPResultLayout.setHorizontalGroup(
+            jPResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+        jPResultLayout.setVerticalGroup(
+            jPResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPResult);
 
         jLTopo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLTopo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,7 +102,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPResult)
+                            .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jBMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -96,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jPIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -119,11 +134,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBMostrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPResult, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBNova)
                 .addGap(36, 36, 36))
@@ -141,17 +156,17 @@ public class Principal extends javax.swing.JFrame {
         
         if (contador < alunos.length){
             a.setNome(jTAluno.getText());
-            a.setIdade(Integer.parseInt(jTIdade.getText()));
+            a.setIdade(Integer.parseInt(jPIdade.getText()));
             alunos[contador] = a;
             jTAluno.setText("");
-            jTIdade.setText("");
+            jPIdade.setText("");
             jTAluno.requestFocus();
             contador++;
             jLTopo.setText("Cadastro Aluno #" + (contador + 1));
             
             if (contador == 5){
                 jTAluno.setEnabled(false);
-                jTIdade.setEnabled(false);
+                jPIdade.setEnabled(false);
                 jBAdicionar.setEnabled(false);
                 mostrarCadastro();
             }
@@ -225,8 +240,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLTopo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jPResult;
+    private javax.swing.JTextField jPIdade;
+    private javax.swing.JPanel jPResult;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTAluno;
-    private javax.swing.JTextField jTIdade;
     // End of variables declaration//GEN-END:variables
 }
