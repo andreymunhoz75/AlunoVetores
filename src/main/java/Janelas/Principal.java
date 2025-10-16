@@ -189,7 +189,7 @@ public class Principal extends javax.swing.JFrame {
                     
                     if (comp instanceof JLabel && "jLIdade".equals(comp.getName())){
                         JLabel labelIdade = (JLabel) comp;
-                        labelIdade.setText(String.valueOf(aluno.getIdade()));
+                        labelIdade.setText(String.valueOf(aluno.getIdade(S)));
                     }
                 }
                 jPResult.add(JP);
